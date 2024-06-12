@@ -1,0 +1,49 @@
+[project]
+name = "cfn-error-detector"
+version = "0.1.0"
+description = "Add your description here"
+dependencies = [
+    "boto3>=1.34.124",
+    "click>=8.1.7",
+    "pydantic>=2.7.3",
+    "tzlocal>=5.2",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pre-commit>=3.7.1",
+    "mypy>=1.10.0",
+    "isort>=5.13.2",
+    "black>=24.4.2",
+    "autoflake>=2.3.1",
+    "python-lsp-server[all]>=1.11.0",
+    "percache>=0.4.4",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cfn_error_detector"]
+
+[project.scripts]
+app = "cfn_error_detector.cli:main"
+
+[tool.black]
+line-length = 160
+
+[tool.isort]
+profile = "black"
+
+[tool.autoflake]
+remove-unused-variables = true
+remove-all-unused-imports = true
+in-place = true
+recursive = true

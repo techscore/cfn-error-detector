@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euC
+# set -o pipefail
+
+dir="$(dirname "$(readlink -f "$0")")"
+
+rye run \
+  --pyproject "${dir}/pyproject.toml" \
+  app \
+  "$@"
