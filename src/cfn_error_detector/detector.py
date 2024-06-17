@@ -67,9 +67,11 @@ def _detect(stacks: list[Stack], stack_name: str, path: list[str] = []) -> list[
             event_stack_name = stack_name_from_physical_id(event["PhysicalResourceId"])
             if event_stack_name == stack_name:
                 continue
-            result.extend(_detect(stacks, event_stack_name, path=[*path, event["LogicalResourceId"]]))
-        else:
-            result.append(ErrorEvent.new(raw=event, path=path))
+            in_nested = _detect(stacks, event_stack_name, path=[*path, event["LogicalResourceId"]])
+            if 0 < len(in_nested):
+                result.extend(in_nested)
+                continue
+        result.append(ErrorEvent.new(raw=event, path=path))
 
     return result
 
