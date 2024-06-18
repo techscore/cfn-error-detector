@@ -37,11 +37,11 @@ class StackNotFound(BaseModel):
 Detected = ErrorEvent | StackNotFound
 
 
-def detect(stacks: list[Stack], stack_name: str, path: list[str] = []) -> Tuple[list[ErrorEvent], set[StackNotFound]]:
+def detect(stacks: list[Stack], stack_name: str) -> Tuple[list[ErrorEvent], set[StackNotFound]]:
     lefts: list[ErrorEvent] = []
     rights: set[StackNotFound] = set()
 
-    for d in _detect(stacks, stack_name, path=path):
+    for d in _detect(stacks, stack_name, path=["root"]):
         if isinstance(d, ErrorEvent):
             lefts.append(d)
         elif isinstance(d, StackNotFound):
