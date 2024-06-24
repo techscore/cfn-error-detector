@@ -34,7 +34,7 @@ allow-direct-references = true
 packages = ["src/cfn_error_detector"]
 
 [project.scripts]
-app = "cfn_error_detector.cli:main"
+cfn-error-detector = "cfn_error_detector.cli:main"
 
 [tool.black]
 line-length = 160
