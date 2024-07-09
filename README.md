@@ -20,12 +20,20 @@ This will install the `cfn-error-detector` command-line tool.
 
 ## Usage
 
+If the stack name is `foo-app-stack`...
+
 ### Detect Error Cause
 
 To show the cause of error for a specified stack, use the `detect` subcommand followed by the stack name. For example:
 
 ```sh
-cfn-error-detector detect bcs-staging
+cfn-error-detector detect foo-app-stack
+```
+
+To display the path of the template file that caused the error, specify the root template file path.
+
+```sh
+cfn-error-detector detect foo-app-stack -t template.yaml
 ```
 
 ### Perform Stack Rollback
@@ -33,7 +41,7 @@ cfn-error-detector detect bcs-staging
 To manually initiate a stack rollback, use the `rollback` subcommand followed by the stack name:
 
 ```sh
-cfn-error-detector rollback bcs-staging
+cfn-error-detector rollback foo-app-stack
 ```
 
 ## Best Practices
