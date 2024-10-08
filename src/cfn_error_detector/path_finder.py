@@ -17,5 +17,16 @@ def find_stack_template(template_file: Path, stack_path: list[str]) -> Path:
 
 
 def load_template_file(file_path: Path) -> Any:
+    class IgnoreUnknownTagsLoader(yaml.SafeLoader):
+        def ignore_unknown(self, suffix, node):  # type: ignore
+            if isinstance(node, yaml.ScalarNode):
+                return self.construct_scalar(node)
+            elif isinstance(node, yaml.SequenceNode):
+                return self.construct_sequence(node)
+            elif isinstance(node, yaml.MappingNode):
+                return self.construct_mapping(node)
+
+    IgnoreUnknownTagsLoader.add_multi_constructor("", IgnoreUnknownTagsLoader.ignore_unknown)
+
     with open(file_path, "r") as file:
-        return yaml.safe_load(file)
+        return yaml.load(file, Loader=IgnoreUnknownTagsLoader)
