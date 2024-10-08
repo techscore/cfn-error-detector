@@ -13,7 +13,7 @@ First, install Rye by following the [official installation guide](https://github
 Once Rye is installed, you can install `cfn-error-detector` using the following command:
 
 ```sh
-rye tools install --git 'https://github.com/ajisaka/cfn-error-detector' cfn-error-detector
+rye tools install --git 'https://github.com/techscore/cfn-error-detector' cfn_error_detector
 ```
 
 This will install the `cfn-error-detector` command-line tool.
